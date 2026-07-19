@@ -1,0 +1,1181 @@
+{
+  "@context": "https://etzhayyim.com/ns/kotodama/v1",
+  "@id": "did:web:hanrei.etzhayyim.com",
+  "component": {
+    "env": {
+      "MURAKUMO_URL": "https://murakumo.etzhayyim.com/api/openai/v1/chat/completions"
+    }
+  },
+  "convoSystemPrompt": "You are the hanrei global agent — worldwide case law, legislation, and judicial intelligence. You cover 60+ national jurisdictions across all continents and 8 international courts (ICJ, ICC, ECHR, CJEU, IACHR, ACHPR, ITLOS, WTO AB). You can search court precedents, track legislation, compare legal systems (civil law, common law, Islamic law, mixed), and provide gazette/official journal updates. For Japan, you have deep coverage with 6 court levels (supreme to summary). Respond helpfully in the user's language.",
+  "duties": [
+    "勤労の義務"
+  ],
+  "entities": [
+    {
+      "did": "did:web:hanrei.etzhayyim.com:court:supreme",
+      "id": "court-supreme",
+      "name": "最高裁判所",
+      "role": "court-writer",
+      "source": {
+        "category": "supreme",
+        "language": "ja",
+        "type": "html",
+        "url": "https://www.courts.go.jp/app/hanrei_jp/search2"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:court:ip_high",
+      "id": "court-ip-high",
+      "name": "知的財産高等裁判所",
+      "role": "court-writer",
+      "source": {
+        "category": "ip_high",
+        "language": "ja",
+        "type": "html",
+        "url": "https://www.courts.go.jp/app/hanrei_jp/search5"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:court:high",
+      "id": "court-high",
+      "name": "高等裁判所",
+      "role": "court-writer",
+      "source": {
+        "category": "high",
+        "language": "ja",
+        "type": "html",
+        "url": "https://www.courts.go.jp/app/hanrei_jp/search3"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:court:district",
+      "id": "court-district",
+      "name": "地方裁判所",
+      "role": "court-writer",
+      "source": {
+        "category": "district",
+        "language": "ja",
+        "type": "html",
+        "url": "https://www.courts.go.jp/app/hanrei_jp/search4"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:court:family",
+      "id": "court-family",
+      "name": "家庭裁判所",
+      "role": "court-writer",
+      "source": {
+        "category": "family",
+        "language": "ja",
+        "type": "html",
+        "url": "https://www.courts.go.jp/app/hanrei_jp/search6"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:court:summary_court",
+      "id": "court-summary",
+      "name": "簡易裁判所",
+      "role": "court-writer",
+      "source": {
+        "category": "summary_court",
+        "language": "ja",
+        "type": "html",
+        "url": "https://www.courts.go.jp/app/hanrei_jp/search7"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:source:kanpo",
+      "id": "gazette-kanpo",
+      "name": "官報",
+      "role": "gazette-writer",
+      "source": {
+        "category": "gazette",
+        "language": "ja",
+        "type": "html",
+        "url": "https://kanpou.npb.go.jp/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:source:egov",
+      "id": "legislation-egov",
+      "name": "e-Gov法令検索",
+      "role": "legislation-writer",
+      "source": {
+        "category": "legislation",
+        "language": "ja",
+        "type": "api",
+        "url": "https://elaws.e-gov.go.jp/api/1/lawdata"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:jpn",
+      "id": "jurisdiction-jpn",
+      "name": "Japan",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "ja",
+        "type": "html",
+        "url": "https://www.courts.go.jp/app/hanrei_jp/search1"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:kor",
+      "id": "jurisdiction-kor",
+      "name": "South Korea",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "ko",
+        "type": "html",
+        "url": "https://glaw.scourt.go.kr/wsjo/panre/sjo060.do"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:chn",
+      "id": "jurisdiction-chn",
+      "name": "China",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "zh",
+        "type": "html",
+        "url": "https://wenshu.court.gov.cn/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:twn",
+      "id": "jurisdiction-twn",
+      "name": "Taiwan",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "zh-TW",
+        "type": "html",
+        "url": "https://judgment.judicial.gov.tw/FJUD/default.aspx"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:hkg",
+      "id": "jurisdiction-hkg",
+      "name": "Hong Kong",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://legalref.judiciary.hk/lrs/common/ju/judgment.jsp"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:mng",
+      "id": "jurisdiction-mng",
+      "name": "Mongolia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "mn",
+        "type": "html",
+        "url": "https://supremecourt.mn/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:sgp",
+      "id": "jurisdiction-sgp",
+      "name": "Singapore",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.elitigation.sg/gd"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:tha",
+      "id": "jurisdiction-tha",
+      "name": "Thailand",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "th",
+        "type": "html",
+        "url": "https://deka.supremecourt.or.th/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:mys",
+      "id": "jurisdiction-mys",
+      "name": "Malaysia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "ms",
+        "type": "html",
+        "url": "https://www.kehakiman.gov.my/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:idn",
+      "id": "jurisdiction-idn",
+      "name": "Indonesia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "id",
+        "type": "html",
+        "url": "https://putusan3.mahkamahagung.go.id/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:phl",
+      "id": "jurisdiction-phl",
+      "name": "Philippines",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://elibrary.judiciary.gov.ph/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:vnm",
+      "id": "jurisdiction-vnm",
+      "name": "Vietnam",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "vi",
+        "type": "html",
+        "url": "https://congbobanan.toaan.gov.vn/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:mmr",
+      "id": "jurisdiction-mmr",
+      "name": "Myanmar",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "my",
+        "type": "html",
+        "url": "https://www.unionsupremecourt.gov.mm/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:khm",
+      "id": "jurisdiction-khm",
+      "name": "Cambodia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "km",
+        "type": "html",
+        "url": "https://www.eccc.gov.kh/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:ind",
+      "id": "jurisdiction-ind",
+      "name": "India",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://main.sci.gov.in/judgments"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:pak",
+      "id": "jurisdiction-pak",
+      "name": "Pakistan",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.supremecourt.gov.pk/judgments/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:bgd",
+      "id": "jurisdiction-bgd",
+      "name": "Bangladesh",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "http://www.supremecourt.gov.bd/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:lka",
+      "id": "jurisdiction-lka",
+      "name": "Sri Lanka",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.supremecourt.lk/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:aus",
+      "id": "jurisdiction-aus",
+      "name": "Australia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.austlii.edu.au/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:nzl",
+      "id": "jurisdiction-nzl",
+      "name": "New Zealand",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.nzlii.org/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:usa",
+      "id": "jurisdiction-usa",
+      "name": "United States",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.supremecourt.gov/opinions/opinions.aspx"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:can",
+      "id": "jurisdiction-can",
+      "name": "Canada",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.canlii.org/en/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:mex",
+      "id": "jurisdiction-mex",
+      "name": "Mexico",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "es",
+        "type": "html",
+        "url": "https://sjf2.scjn.gob.mx/busqueda-principal-tesis"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:bra",
+      "id": "jurisdiction-bra",
+      "name": "Brazil",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "pt",
+        "type": "html",
+        "url": "https://jurisprudencia.stf.jus.br/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:arg",
+      "id": "jurisdiction-arg",
+      "name": "Argentina",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "es",
+        "type": "html",
+        "url": "https://sjconsulta.csjn.gov.ar/sjconsulta/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:col",
+      "id": "jurisdiction-col",
+      "name": "Colombia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "es",
+        "type": "html",
+        "url": "https://www.corteconstitucional.gov.co/relatoria/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:chl",
+      "id": "jurisdiction-chl",
+      "name": "Chile",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "es",
+        "type": "html",
+        "url": "https://suprema.pjud.cl/SITSUPPORWEB/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:per",
+      "id": "jurisdiction-per",
+      "name": "Peru",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "es",
+        "type": "html",
+        "url": "https://www.pj.gob.pe/wps/wcm/connect/jurisprudencia/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:gbr",
+      "id": "jurisdiction-gbr",
+      "name": "United Kingdom",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.bailii.org/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:deu",
+      "id": "jurisdiction-deu",
+      "name": "Germany",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "de",
+        "type": "html",
+        "url": "https://www.bundesverfassungsgericht.de/entscheidungen.html"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:fra",
+      "id": "jurisdiction-fra",
+      "name": "France",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "fr",
+        "type": "html",
+        "url": "https://www.legifrance.gouv.fr/search/juri"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:ita",
+      "id": "jurisdiction-ita",
+      "name": "Italy",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "it",
+        "type": "html",
+        "url": "https://www.italgiure.giustizia.it/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:esp",
+      "id": "jurisdiction-esp",
+      "name": "Spain",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "es",
+        "type": "html",
+        "url": "https://www.poderjudicial.es/search/indexAN.jsp"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:nld",
+      "id": "jurisdiction-nld",
+      "name": "Netherlands",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "nl",
+        "type": "html",
+        "url": "https://uitspraken.rechtspraak.nl/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:bel",
+      "id": "jurisdiction-bel",
+      "name": "Belgium",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "fr",
+        "type": "html",
+        "url": "https://juportal.be/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:aut",
+      "id": "jurisdiction-aut",
+      "name": "Austria",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "de",
+        "type": "html",
+        "url": "https://www.ris.bka.gv.at/Jus/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:che",
+      "id": "jurisdiction-che",
+      "name": "Switzerland",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "de",
+        "type": "html",
+        "url": "https://www.bger.ch/ext/eurospider/live/de/php/aza/http/index.php"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:irl",
+      "id": "jurisdiction-irl",
+      "name": "Ireland",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.bailii.org/ie/cases/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:lux",
+      "id": "jurisdiction-lux",
+      "name": "Luxembourg",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "fr",
+        "type": "html",
+        "url": "https://justice.public.lu/fr/jurisprudence.html"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:swe",
+      "id": "jurisdiction-swe",
+      "name": "Sweden",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "sv",
+        "type": "html",
+        "url": "https://www.domstol.se/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:nor",
+      "id": "jurisdiction-nor",
+      "name": "Norway",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "no",
+        "type": "html",
+        "url": "https://lovdata.no/info/rettspraksis"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:dnk",
+      "id": "jurisdiction-dnk",
+      "name": "Denmark",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "da",
+        "type": "html",
+        "url": "https://domstol.dk/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:fin",
+      "id": "jurisdiction-fin",
+      "name": "Finland",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "fi",
+        "type": "html",
+        "url": "https://finlex.fi/fi/oikeus/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:isl",
+      "id": "jurisdiction-isl",
+      "name": "Iceland",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "is",
+        "type": "html",
+        "url": "https://www.haestirettur.is/domar"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:pol",
+      "id": "jurisdiction-pol",
+      "name": "Poland",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "pl",
+        "type": "html",
+        "url": "https://orzeczenia.nsa.gov.pl/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:cze",
+      "id": "jurisdiction-cze",
+      "name": "Czech Republic",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "cs",
+        "type": "html",
+        "url": "https://www.usoud.cz/en/decisions"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:svk",
+      "id": "jurisdiction-svk",
+      "name": "Slovakia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "sk",
+        "type": "html",
+        "url": "https://www.nsud.sk/rozhodnutia/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:hun",
+      "id": "jurisdiction-hun",
+      "name": "Hungary",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "hu",
+        "type": "html",
+        "url": "https://birosag.hu/birosagi-hatarozatok-gyujtemenye"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:rou",
+      "id": "jurisdiction-rou",
+      "name": "Romania",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "ro",
+        "type": "html",
+        "url": "https://www.scj.ro/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:bgr",
+      "id": "jurisdiction-bgr",
+      "name": "Bulgaria",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "bg",
+        "type": "html",
+        "url": "https://legalacts.justice.bg/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:hrv",
+      "id": "jurisdiction-hrv",
+      "name": "Croatia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "hr",
+        "type": "html",
+        "url": "https://sudskapraksa.csp.vsrh.hr/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:svn",
+      "id": "jurisdiction-svn",
+      "name": "Slovenia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "sl",
+        "type": "html",
+        "url": "https://www.sodnapraksa.si/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:ltu",
+      "id": "jurisdiction-ltu",
+      "name": "Lithuania",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "lt",
+        "type": "html",
+        "url": "https://liteko.teismai.lt/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:lva",
+      "id": "jurisdiction-lva",
+      "name": "Latvia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "lv",
+        "type": "html",
+        "url": "https://manas.tiesas.lv/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:est",
+      "id": "jurisdiction-est",
+      "name": "Estonia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "et",
+        "type": "html",
+        "url": "https://www.riigikohus.ee/lahendid"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:prt",
+      "id": "jurisdiction-prt",
+      "name": "Portugal",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "pt",
+        "type": "html",
+        "url": "https://www.dgsi.pt/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:grc",
+      "id": "jurisdiction-grc",
+      "name": "Greece",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "el",
+        "type": "html",
+        "url": "https://www.adjustice.gr/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:cyp",
+      "id": "jurisdiction-cyp",
+      "name": "Cyprus",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.supremecourt.gov.cy/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:mlt",
+      "id": "jurisdiction-mlt",
+      "name": "Malta",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://ecourts.gov.mt/onlineservices/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:ukr",
+      "id": "jurisdiction-ukr",
+      "name": "Ukraine",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "uk",
+        "type": "html",
+        "url": "https://reyestr.court.gov.ua/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:rus",
+      "id": "jurisdiction-rus",
+      "name": "Russia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "ru",
+        "type": "html",
+        "url": "https://sudact.ru/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:srb",
+      "id": "jurisdiction-srb",
+      "name": "Serbia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "sr",
+        "type": "html",
+        "url": "https://www.vk.sud.rs/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:tur",
+      "id": "jurisdiction-tur",
+      "name": "Turkey",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "tr",
+        "type": "html",
+        "url": "https://karararama.yargitay.gov.tr/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:isr",
+      "id": "jurisdiction-isr",
+      "name": "Israel",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "he",
+        "type": "html",
+        "url": "https://supremedecisions.court.gov.il/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:sau",
+      "id": "jurisdiction-sau",
+      "name": "Saudi Arabia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "ar",
+        "type": "html",
+        "url": "https://www.moj.gov.sa/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:are",
+      "id": "jurisdiction-are",
+      "name": "United Arab Emirates",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "ar",
+        "type": "html",
+        "url": "https://www.dc.gov.ae/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:qat",
+      "id": "jurisdiction-qat",
+      "name": "Qatar",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "ar",
+        "type": "html",
+        "url": "https://www.almeezan.qa/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:egy",
+      "id": "jurisdiction-egy",
+      "name": "Egypt",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "ar",
+        "type": "html",
+        "url": "https://www.cc.gov.eg/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:zaf",
+      "id": "jurisdiction-zaf",
+      "name": "South Africa",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.saflii.org/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:nga",
+      "id": "jurisdiction-nga",
+      "name": "Nigeria",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.nigerialii.org/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:ken",
+      "id": "jurisdiction-ken",
+      "name": "Kenya",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "http://kenyalaw.org/caselaw/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:gha",
+      "id": "jurisdiction-gha",
+      "name": "Ghana",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://ghalii.org/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:tza",
+      "id": "jurisdiction-tza",
+      "name": "Tanzania",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "en",
+        "type": "html",
+        "url": "https://tanzlii.org/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:eth",
+      "id": "jurisdiction-eth",
+      "name": "Ethiopia",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "am",
+        "type": "html",
+        "url": "https://www.fsc.gov.et/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:mar",
+      "id": "jurisdiction-mar",
+      "name": "Morocco",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "case_db",
+        "language": "ar",
+        "type": "html",
+        "url": "https://jurisprudence.cour-de-cassation.ma/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:icj",
+      "id": "jurisdiction-icj",
+      "name": "International Court of Justice",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "international",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.icj-cij.org/decisions"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:icc",
+      "id": "jurisdiction-icc",
+      "name": "International Criminal Court",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "international",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.icc-cpi.int/court-record"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:echr",
+      "id": "jurisdiction-echr",
+      "name": "European Court of Human Rights",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "international",
+        "language": "en",
+        "type": "html",
+        "url": "https://hudoc.echr.coe.int/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:cjeu",
+      "id": "jurisdiction-cjeu",
+      "name": "Court of Justice of the EU",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "international",
+        "language": "en",
+        "type": "html",
+        "url": "https://curia.europa.eu/juris/recherche.jsf"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:iachr",
+      "id": "jurisdiction-iachr",
+      "name": "Inter-American Court of Human Rights",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "international",
+        "language": "es",
+        "type": "html",
+        "url": "https://www.corteidh.or.cr/casos_sentencias.cfm"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:achpr",
+      "id": "jurisdiction-achpr",
+      "name": "African Court on Human and Peoples' Rights",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "international",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.african-court.org/cpmt/latest-judgments"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:itlos",
+      "id": "jurisdiction-itlos",
+      "name": "Int'l Tribunal for the Law of the Sea",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "international",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.itlos.org/en/main/cases/"
+      }
+    },
+    {
+      "did": "did:web:hanrei.etzhayyim.com:jurisdiction:wto_ab",
+      "id": "jurisdiction-wto-ab",
+      "name": "WTO Appellate Body",
+      "role": "jurisdiction-writer",
+      "source": {
+        "category": "international",
+        "language": "en",
+        "type": "html",
+        "url": "https://www.wto.org/english/tratop_e/dispu_e/dispu_e.htm"
+      }
+    }
+  ],
+  "governance": {
+    "classification": "public",
+    "complianceFrameworks": [],
+    "raci": "responsible"
+  },
+  "kpi": [
+    "credits の獲得"
+  ],
+  "name": "hanrei",
+  "nanoid": "h4nr31jp",
+  "performerType": "service",
+  "profile": {
+    "agentType": "autonomous",
+    "avatar": "判例",
+    "capabilities": [
+      "case-law-search",
+      "legislation-lookup",
+      "judicial-intelligence"
+    ],
+    "category": "legal",
+    "contract": "裁判所法",
+    "description": "Global case law, legislation, gazette & judicial intelligence — 60+ national jurisdictions, 8 international courts (ICJ, ICC, ECHR, CJEU, IACHR, ACHPR, ITLOS, WTO AB), 4 legal systems (civil law, common law, Islamic law, mixed)",
+    "displayName": "判例・法令 Global DB",
+    "isBot": true,
+    "operator": "etzhayyim"
+  },
+  "project": "hanrei",
+  "runtimeType": "worker",
+  "space": {
+    "channels": [
+      {
+        "default": true,
+        "description": "Latest court case precedents (global)",
+        "kind": "public",
+        "name": "hanrei-feed"
+      },
+      {
+        "description": "Official gazette updates (judge appointments, legislation)",
+        "kind": "public",
+        "name": "kanpo-feed"
+      },
+      {
+        "description": "Daily and weekly case law digests",
+        "kind": "public",
+        "name": "hanrei-digest"
+      },
+      {
+        "description": "Legislation updates from worldwide jurisdictions",
+        "kind": "public",
+        "name": "global-legislation"
+      }
+    ],
+    "description": "Worldwide case law, legislation, and judicial intelligence — 60+ jurisdictions, 8 international courts",
+    "historyVisibility": "world-readable",
+    "joinRule": "public",
+    "name": "Global Case Law & Legislation Intelligence"
+  },
+  "subDidCommand": "register_court_profiles",
+  "triggers": {
+    "subscribeRepos": {
+      "collections": [
+        "com.etzhayyim.hanrei.caseRecord",
+        "com.etzhayyim.hanrei.collectionJob",
+        "com.etzhayyim.hanrei.court",
+        "com.etzhayyim.hanrei.jurisdiction",
+        "com.etzhayyim.hanrei.digest",
+        "app.bsky.feed.post",
+        "app.bsky.feed.like",
+        "app.bsky.feed.repost",
+        "app.bsky.graph.follow"
+      ]
+    }
+  },
+  "uiType": "yoro"
+}

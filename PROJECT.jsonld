@@ -1,0 +1,9 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/"
+  },
+  "@type": "SoftwareApplication",
+  "name": "etzhayyim-project-hanrei",
+  "applicationCategory": "LegalTechApplication",
+  "description": "Japanese case law, official gazette, and legislation intelligence platform (hanrei.etzhayyim.com). TS native App."
+}
