@@ -1,0 +1,128 @@
+{
+  "schema": "com.etzhayyim.hanrei.sourceCatalog/v1",
+  "jurisdiction": "jpn",
+  "verifiedAt": "2026-08-19",
+  "verifier": "tools/verify_sources.cljs",
+  "note": [
+    "Machine-readable catalogue of the upstream legal-data endpoints this repo ingests.",
+    "Every url below was fetched and observed to return the recorded status on verifiedAt.",
+    "Entries under `sources` are shaped as RegisterSourceInput (src/types.ts) so they can be",
+    "passed to registerSource without translation; `caseCollections` are shaped as",
+    "CourtProfileInput.searchPath targets.",
+    "Nothing here is aspirational: an endpoint that cannot be fetched does not get an entry,",
+    "it gets a line in `knownUnreachable` instead."
+  ],
+
+  "sources": [
+    {
+      "sourceId": "jp-courts-go-jp",
+      "name": "Courts in Japan — case law search (裁判例検索)",
+      "nameLocal": "裁判所 裁判例検索",
+      "kind": "court-website",
+      "jurisdiction": "jpn",
+      "homepage": "https://www.courts.go.jp/",
+      "apiBase": "https://www.courts.go.jp/app/hanrei_jp/",
+      "license": "https://www.courts.go.jp/policy/index.html",
+      "verify": { "url": "https://www.courts.go.jp/app/hanrei_jp/search1", "expectStatus": 200 }
+    },
+    {
+      "sourceId": "jp-ip-high-court",
+      "name": "Intellectual Property High Court",
+      "nameLocal": "知的財産高等裁判所",
+      "kind": "court-website",
+      "jurisdiction": "jpn",
+      "homepage": "https://www.ip.courts.go.jp/",
+      "license": null,
+      "verify": { "url": "https://www.ip.courts.go.jp/", "expectStatus": 200 }
+    },
+    {
+      "sourceId": "jp-kanpo",
+      "name": "Official Gazette of Japan (digital, statutory edition since 2025)",
+      "nameLocal": "官報",
+      "kind": "official-gazette",
+      "jurisdiction": "jpn",
+      "homepage": "https://www.kanpo.go.jp/",
+      "license": null,
+      "verify": { "url": "https://www.kanpo.go.jp/", "expectStatus": 200 }
+    },
+    {
+      "sourceId": "jp-kanpou-npb",
+      "name": "Official Gazette — National Printing Bureau site (legacy surface)",
+      "nameLocal": "官報（国立印刷局）",
+      "kind": "official-gazette",
+      "jurisdiction": "jpn",
+      "homepage": "https://kanpou.npb.go.jp/",
+      "license": null,
+      "verify": { "url": "https://kanpou.npb.go.jp/", "expectStatus": 200 }
+    },
+    {
+      "sourceId": "jp-egov-laws-api-v2",
+      "name": "e-Gov Japanese Law Search — API v2 (JSON)",
+      "nameLocal": "e-Gov法令検索 法令API v2",
+      "kind": "egov-portal",
+      "jurisdiction": "jpn",
+      "homepage": "https://laws.e-gov.go.jp/",
+      "apiBase": "https://laws.e-gov.go.jp/api/2/",
+      "license": null,
+      "verify": { "url": "https://laws.e-gov.go.jp/api/2/laws?limit=1", "expectStatus": 200 }
+    },
+    {
+      "sourceId": "jp-egov-laws-api-v1",
+      "name": "e-Gov Japanese Law Search — API v1 (XML, legacy)",
+      "nameLocal": "e-Gov法令検索 法令API v1",
+      "kind": "egov-portal",
+      "jurisdiction": "jpn",
+      "homepage": "https://elaws.e-gov.go.jp/",
+      "apiBase": "https://laws.e-gov.go.jp/api/1/",
+      "license": null,
+      "verify": { "url": "https://laws.e-gov.go.jp/api/1/lawlists/1", "expectStatus": 200 }
+    },
+    {
+      "sourceId": "wikidata",
+      "name": "Wikidata SPARQL endpoint (court entity collection)",
+      "kind": "wikidata",
+      "homepage": "https://query.wikidata.org/",
+      "apiBase": "https://query.wikidata.org/sparql",
+      "license": "CC0-1.0",
+      "verify": {
+        "url": "https://query.wikidata.org/sparql?query=SELECT%20%3Fs%20WHERE%20%7B%3Fs%20%3Fp%20%3Fo%7D%20LIMIT%201&format=json",
+        "expectStatus": 200,
+        "note": "The bare endpoint path answers only when a query is attached; verifying the bare path reports a connection failure, not a 200."
+      }
+    }
+  ],
+
+  "caseCollections": [
+    { "collectionId": "saikosai",  "nameLocal": "最高裁判所",       "name": "Supreme Court",                    "searchPath": "https://www.courts.go.jp/app/hanrei_jp/search2/index.html", "verify": { "url": "https://www.courts.go.jp/app/hanrei_jp/search2/index.html", "expectStatus": 200 } },
+    { "collectionId": "kotosai",   "nameLocal": "高等裁判所",       "name": "High Courts",                      "searchPath": "https://www.courts.go.jp/app/hanrei_jp/search3/index.html", "verify": { "url": "https://www.courts.go.jp/app/hanrei_jp/search3/index.html", "expectStatus": 200 } },
+    { "collectionId": "kakyu",     "nameLocal": "下級裁判所(速報)", "name": "Lower courts (rapid report)",      "searchPath": "https://www.courts.go.jp/app/hanrei_jp/search4/index.html", "verify": { "url": "https://www.courts.go.jp/app/hanrei_jp/search4/index.html", "expectStatus": 200 } },
+    { "collectionId": "gyosei",    "nameLocal": "行政事件",         "name": "Administrative cases",             "searchPath": "https://www.courts.go.jp/app/hanrei_jp/search5/index.html", "verify": { "url": "https://www.courts.go.jp/app/hanrei_jp/search5/index.html", "expectStatus": 200 } },
+    { "collectionId": "rodo",      "nameLocal": "労働事件",         "name": "Labour cases",                     "searchPath": "https://www.courts.go.jp/app/hanrei_jp/search6/index.html", "verify": { "url": "https://www.courts.go.jp/app/hanrei_jp/search6/index.html", "expectStatus": 200 } },
+    { "collectionId": "chizai",    "nameLocal": "知的財産事件",     "name": "Intellectual property cases",      "searchPath": "https://www.courts.go.jp/app/hanrei_jp/search7/index.html", "verify": { "url": "https://www.courts.go.jp/app/hanrei_jp/search7/index.html", "expectStatus": 200 } }
+  ],
+
+  "courtTiers": {
+    "note": [
+      "CourtTier (src/types.ts) has six values and courts.go.jp publishes six case",
+      "collections — these are two different axes and must not be zipped together.",
+      "The collections are two court tiers plus four subject-matter corpora; district,",
+      "family and summary court decisions are not separately published, they appear",
+      "inside 下級裁判所(速報) and the subject-matter collections.",
+      "Only the mappings the live site states are recorded here."
+    ],
+    "mapping": {
+      "supreme": "saikosai",
+      "high": "kotosai",
+      "ip-high": "chizai",
+      "district": "kakyu",
+      "family": "kakyu",
+      "summary": "kakyu"
+    }
+  },
+
+  "knownUnreachable": [
+    { "url": "https://www.kanpou.npb.go.jp/", "observed": "dns-nxdomain", "note": "The gazette host answers without the www label; use https://kanpou.npb.go.jp/." },
+    { "url": "https://kanpo.go.jp/",          "observed": "connect-failed", "note": "The digital gazette answers on www.kanpo.go.jp only." },
+    { "url": "https://www.courts.go.jp/app/hanrei_jp/search8", "observed": 404, "note": "Boundary probe: the collections end at search7. Recorded so a future widening is a decision, not a guess." }
+  ]
+}
