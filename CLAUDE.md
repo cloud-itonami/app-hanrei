@@ -1,4 +1,11 @@
-> **DEPRECATED**: Actor migrated to `orgs/etzhayyim/com-etzhayyim-hanrei/manifest.edn` (T1 MCP-Compose). This project wasm/*/src/app.ts is retained as T3 fallback only.
+> **DEPRECATED — read this as history, not as instructions.** The actor migrated to
+> `orgs/etzhayyim/com-etzhayyim-hanrei/manifest.edn` (T1 MCP-Compose). The T3 fallback this
+> file describes (`wasm/*/src/app.ts`) **did not come across in the repo migration** — there is
+> no `wasm/` directory here and no `etzhayyim` CLI in this workspace, so every `cd`/`deploy`
+> instruction below is unfollowable. The command names below are the old vendor app's
+> snake_case; this repo's 31 commands are camelCase (see `README.md`).
+>
+> **What is actually operable here: [`docs/operator-quickstart.md`](docs/operator-quickstart.md).**
 
 # etzhayyim-project-hanrei — Global Case Law, Legislation & Judicial Intelligence
 

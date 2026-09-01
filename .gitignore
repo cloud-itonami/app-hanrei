@@ -1,0 +1,3 @@
+# `npm install` in kotoba/ or xrpc-adapter/ is a documented step
+# (docs/operator-quickstart.md); without this the tree goes dirty by design.
+node_modules/

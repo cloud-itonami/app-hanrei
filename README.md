@@ -1,8 +1,21 @@
-# etzhayyim-project-hanrei
+# app-hanrei
 
-判例・官報・法令 intelligence platform (hanrei.etzhayyim.com)。
+判例・官報・法令 intelligence platform (hanrei.etzhayyim.com) の source-of-record。
 
-TS Native App — WASM 不使用、`@etzhayyim/kotodama-host-sdk` + esbuild。
+**まず読むもの: [`docs/operator-quickstart.md`](docs/operator-quickstart.md)** —
+この checkout で実際に走るもの、走らないもの、上流ソースが移転したときの手順。
+
+## このリポジトリの中身（移行後の実態）
+
+`etzhayyim/root` の `60-apps/etzhayyim-project-hanrei` からの移行（`migration.edn`）で、
+移ってきたものと移らなかったものがある。**clean checkout から動かせるのは 1 つだけ**:
+
+| 中身 | パス | 状態 |
+|---|---|---|
+| 上流ソースの目録と検証器 | `data/sources.json` / `tools/verify_sources.cljs` | **動く。** install も credential も不要 |
+| 31 XRPC コマンドの参照実装 | `kotoba/` | source は揃っている。test の install は当環境では通らない（quickstart 参照） |
+| 上を XRPC として出す Worker | `xrpc-adapter/` | `workspace:*` を宣言しているが workspace root が無く install できない |
+| 稼働 agent の記述子 | `appview/etzhayyim-wasm-hanrei-jp-h4nr31jp/kotodama.jsonld` | データ。対応する bundle はこのリポジトリに無い |
 
 ## Sources (1次ソース)
 
@@ -23,15 +36,41 @@ TS Native App — WASM 不使用、`@etzhayyim/kotodama-host-sdk` + esbuild。
 
 6 court DIDs (`did:web:hanrei.etzhayyim.com:court:{id}`) + 2 source DIDs (官報, e-Gov)
 
+⚠ DID と rkey は id を `[^a-z0-9] → "-"` で潰して導出するので、句読点だけが違う 2 つの
+id は同じ record に着地する。目録に entry を足すときは id を `[a-z0-9-]` に収める
+（詳細は quickstart）。
+
 ## Commands
 
-`collect_cases` / `collect_gazette` / `collect_legislation` — Collection Job Pattern
-`list_cases` / `get_case` / `search_cases` / `list_courts` / `list_sources`
-`list_gazette_entries` / `list_laws` / `get_digest` / `seed_cases`
+`kotoba/src/index.ts` が export する 31 コマンド。**camelCase が正**
+（旧 vendor app の snake_case 名ではない）:
+
+| Tier | Commands |
+|---|---|
+| jurisdiction | `registerJurisdiction` `getJurisdiction` `listJurisdictions` |
+| court | `registerCourtProfiles` `listCourts` `collectWikidataCourts` |
+| case | `seedCases` `getCase` `listCases` `searchCases` |
+| law | `registerLaw` `getLaw` `listLaws` |
+| source | `registerSource` `getSource` `listSources` |
+| gazette | `registerGazetteEntry` `getGazetteEntry` `listGazetteEntries` |
+| digest | `registerDigest` `getDigest` |
+| hunt | `createInformationHunt` `receiveHuntResult` `listHuntResults` |
+| stats | `coverageStats` `huntCoverageStats` `compareJurisdictions` |
+| collect | `searchDecisions` `extractCasePersons` `collectCases` `collectCaseDetail` |
+
+`collectGazette` / `collectLegislation` は**この repo には無い** —— 旧 vendor app の
+コマンドで、移行時に持ち込まれていない。官報・法令は `registerGazetteEntry` /
+`registerLaw` と目録側の entry で扱う。
 
 ## Build & Deploy
 
+**このリポジトリからはデプロイできない。** 以前ここに書かれていた
+`cd wasm/etzhayyim-wasm-hanrei-jp-h4nr31jp && etzhayyim deploy` は、移行で
+`wasm/` が持ち込まれなかった時点で踏めない手順になっている（`etzhayyim` CLI も
+このワークスペースには無い）。`CLAUDE.md` の deploy 節も同じ理由で履歴として読むこと。
+
+いま回せるのは目録の検証だけで、それは gate として書かれている:
+
 ```bash
-cd wasm/etzhayyim-wasm-hanrei-jp-h4nr31jp
-etzhayyim deploy
+nbb tools/verify_sources.cljs .    # 0=一致 / 1=相違 / 2=確認できなかった
 ```
