@@ -1,4 +1,4 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; verify_sources.cljs — re-fetch every endpoint recorded in data/sources.json
 ;; and check it still answers with the status the catalogue claims.
 ;;
@@ -20,7 +20,7 @@
 ;; a verifier that ran clean. Likewise the SCANNED line below is an evidence
 ;; floor: a run that checked nothing is never reported as a pass.
 ;;
-;;   nbb tools/verify_sources.cljs [<repo-dir>] [--timeout-ms N]
+;;   kbb --backend sci tools/verify_sources.cljk [<repo-dir>] [--timeout-ms N]
 
 (ns verify-sources
   (:require [clojure.string :as str]
