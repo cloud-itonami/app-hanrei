@@ -27,7 +27,7 @@ predates the migration; it has been corrected in `README.md`.
 ## The thing that runs
 
 ```bash
-nbb tools/verify_sources.cljs .
+kbb --backend sci tools/verify_sources.cljk .
 ```
 
 ```
@@ -79,25 +79,25 @@ print like *checked and found nothing wrong*.
 Transcripts of all five failing runs (they were actually executed):
 
 ```
-$ nbb tools/verify_sources.cljs /tmp/probe-dangling-tier          # exit 1
+$ kbb --backend sci tools/verify_sources.cljk /tmp/probe-dangling-tier          # exit 1
 FAIL	catalogue is internally inconsistent (1):
   - courtTiers.mapping.supreme -> "no-such-collection" is not a collectionId in caseCollections
 
-$ nbb tools/verify_sources.cljs /tmp/probe-404                    # exit 1
+$ kbb --backend sci tools/verify_sources.cljk /tmp/probe-404                    # exit 1
 MISMATCH	source/probe-404	404	expected 200
 SCANNED	1	responded	1
 FAIL	1 of 1 endpoint(s) no longer answer as recorded:
   - source/probe-404	https://www.courts.go.jp/app/hanrei_jp/search8	404	expected 200
 
-$ nbb tools/verify_sources.cljs /tmp/probe-empty-dir              # exit 2
+$ kbb --backend sci tools/verify_sources.cljk /tmp/probe-empty-dir              # exit 2
 CANNOT-ANSWER	no catalogue at /tmp/probe-empty-dir/data/sources.json
   This is exit 2, not a pass: nothing was checked.
 
-$ nbb tools/verify_sources.cljs /tmp/probe-no-verify-blocks       # exit 2
+$ kbb --backend sci tools/verify_sources.cljk /tmp/probe-no-verify-blocks       # exit 2
 CANNOT-ANSWER	catalogue lists zero verifiable URLs.
   Refusing to report a pass over an empty set.
 
-$ nbb tools/verify_sources.cljs /tmp/probe-closed-port            # exit 2
+$ kbb --backend sci tools/verify_sources.cljk /tmp/probe-closed-port            # exit 2
 ERROR   	source/probe-unroutable	no-response: fetch failed	expected 200
 SCANNED	1	responded	0
 CANNOT-ANSWER	1 URL(s) checked, not one HTTP response arrived.

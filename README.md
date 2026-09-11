@@ -20,7 +20,7 @@
 ## Sources (1次ソース)
 
 正本は **`data/sources.json`** — 各 URL は実際に取得して観測した status を記録している。
-`nbb tools/verify_sources.cljs .` が全件を再取得して照合する（一致=0 / 相違=1 /
+`kbb --backend sci tools/verify_sources.cljk .` が全件を再取得して照合する（一致=0 / 相違=1 /
 確認できなかった=2。0 件を合格にしない）。
 
 - **判例**: courts.go.jp 裁判例検索の 6 コレクション —
@@ -72,5 +72,5 @@ id は同じ record に着地する。目録に entry を足すときは id を 
 いま回せるのは目録の検証だけで、それは gate として書かれている:
 
 ```bash
-nbb tools/verify_sources.cljs .    # 0=一致 / 1=相違 / 2=確認できなかった
+kbb --backend sci tools/verify_sources.cljk .    # 0=一致 / 1=相違 / 2=確認できなかった
 ```
