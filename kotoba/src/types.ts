@@ -5,7 +5,7 @@
  * Replaces vendor's vertex_hanrei_jurisdiction / vertex_hanrei_court /
  * vertex_hanrei_case_record with AT PDS records.
  *
- * Identity hierarchy (per hanrei CLAUDE.md):
+ * Identity hierarchy (per hanrei AGENTS.md):
  *   did:web:hanrei.etzhayyim.com                       — controller
  *   did:web:hanrei.etzhayyim.com:jurisdiction:{iso3}   — country / region
  *   did:web:hanrei.etzhayyim.com:court:{jurisdiction}:{courtId}

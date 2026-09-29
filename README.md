@@ -67,7 +67,7 @@ id は同じ record に着地する。目録に entry を足すときは id を 
 **このリポジトリからはデプロイできない。** 以前ここに書かれていた
 `cd wasm/etzhayyim-wasm-hanrei-jp-h4nr31jp && etzhayyim deploy` は、移行で
 `wasm/` が持ち込まれなかった時点で踏めない手順になっている（`etzhayyim` CLI も
-このワークスペースには無い）。`CLAUDE.md` の deploy 節も同じ理由で履歴として読むこと。
+このワークスペースには無い）。`AGENTS.md` の deploy 節も同じ理由で履歴として読むこと。
 
 いま回せるのは目録の検証だけで、それは gate として書かれている:
 
