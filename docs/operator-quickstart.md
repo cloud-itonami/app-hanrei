@@ -262,11 +262,11 @@ root here or replacing that specifier with a file/git reference; neither is done
 
 ### `wasm/` and the `etzhayyim` CLI
 
-`CLAUDE.md` still describes a `src/app.ts` T3 fallback under
+`AGENTS.md` still describes a `src/app.ts` T3 fallback under
 `wasm/etzhayyim-wasm-hanrei-jp-h4nr31jp/`. That directory did not come across in
 the migration — what exists is `appview/etzhayyim-wasm-hanrei-jp-h4nr31jp/kotodama.jsonld`,
 a descriptor with no bundle beside it. `etzhayyim` is not on PATH on this
-machine. Deployment is not driveable from this checkout; treat `CLAUDE.md`'s
+machine. Deployment is not driveable from this checkout; treat `AGENTS.md`'s
 deploy section as history.
 
 ## Running it on a schedule

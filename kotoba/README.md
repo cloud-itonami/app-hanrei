@@ -70,7 +70,7 @@ Vendor's cmdGetJurisdiction / cmdListJurisdictions were already returning `[]`
 is therefore behavior-preserving + finally functional — PDS XRPC writes work
 without waiting for graph-schema additions.
 
-## Authority chain (per hanrei CLAUDE.md)
+## Authority chain (per hanrei AGENTS.md)
 
 ```
 did:web:hanrei.etzhayyim.com                       — controller
